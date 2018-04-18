@@ -3,6 +3,7 @@ from importlib import import_module
 import os
 from flask import Flask, render_template, Response
 import cv2
+import numpy as np
 import imutils
 
 # import camera driver
@@ -31,9 +32,18 @@ def gen(camera):
     while True:
         frame = camera.get_frame()
         if counter == 10:
+            a = frame.find('\xff\xd8')
+            # 0xff 0xd9 is the end of the jpeg frame
+            b = frame.find('\xff\xd9')
+            # Taking the jpeg image as byte stream
+            if a!=-1 and b!=-1:
+                jpg_array = np.fromstring(frame[a:b+2], dtype=np.uint8)
+                if len(jpg_array) != 0:
+                    jpg = cv2.imdecode(jpg_array,1)
+                    detect_people(jpg)
+                    detect_faces(jpg)
+            
             print("Counter 10")
-            detect_people(frame)
-            detect_faces(frame)
             
             counter = 0
         else:
