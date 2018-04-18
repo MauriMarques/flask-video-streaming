@@ -59,6 +59,9 @@ def detect_people(frame):
     (rects, weights) = hog.detectMultiScale(image, winStride=(4, 4),
             padding=(8, 8), scale=1.05)
     
+    rects = np.array([[x, y, x + w, y + h] for (x, y, w, h) in rects])
+    pick = non_max_suppression(rects, probs=None, overlapThresh=0.65)
+
     # draw the final bounding boxes
     for (xA, yA, xB, yB) in pick:
         print("Person xA:{}, xB:{}, yA{}, yB".format(xA, xB, yA, yB))
