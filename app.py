@@ -68,7 +68,7 @@ def detect_people(frame):
         print("Person xA:{}, xB:{}, yA{}, yB".format(xA, xB, yA, yB))
         
 def detect_faces(frame):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(
                 gray,
                 scaleFactor=1.2,
@@ -76,7 +76,7 @@ def detect_faces(frame):
                 minSize=(16, 16)
             )
     for face in faces:
-        face_img, cropped = crop_face(image, face, margin=40)
+        face_img, cropped = crop_face(frame, face, margin=40)
         (x, y, w, h) = cropped
         print("Face xA:{}, xB:{}, yA{}, yB".format(x, w, y, h))
         
