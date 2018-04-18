@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from importlib import import_module
 import os
+from imutils.object_detection import non_max_suppression
 from flask import Flask, render_template, Response
 import cv2
 import numpy as np
