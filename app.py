@@ -43,7 +43,7 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
         
 def detect_people(frame):
-    image = imutils.resize(frame, width=min(400, image.shape[1]))
+    image = imutils.resize(frame, width=min(400, frame.shape[1]))
 
     # detect people in the image
     (rects, weights) = hog.detectMultiScale(image, winStride=(4, 4),
