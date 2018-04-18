@@ -16,8 +16,8 @@ from camera_pi import Camera
 
 app = Flask(__name__)
 hog = cv2.HOGDescriptor()
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 counter = 0
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 @app.route('/')
 def index():
