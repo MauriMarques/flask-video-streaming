@@ -17,7 +17,6 @@ from camera_pi import Camera
 app = Flask(__name__)
 hog = cv2.HOGDescriptor()
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-counter = 0
 
 @app.route('/')
 def index():
@@ -27,6 +26,8 @@ def index():
 
 def gen(camera):
     """Video streaming generator function."""
+    counter = 0
+    
     while True:
         frame = camera.get_frame()
         if counter == 10:
@@ -110,5 +111,4 @@ def video_feed():
 
 if __name__ == '__main__':
     hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-    counter = 0
     app.run(host='0.0.0.0', threaded=True)
